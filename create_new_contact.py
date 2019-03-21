@@ -36,11 +36,11 @@ class CreateNewContact(unittest.TestCase):
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys("2000")
 
-    def _open_creating_contact_page(self, driver):
+    def open_creating_contact_page(self, driver):
         """open creating contact"""
         driver.find_element_by_link_text("add new").click()
 
-    def _login(self, driver):
+    def login(self, driver):
         """login"""
         driver.find_element_by_name("user").click()
         driver.find_element_by_name("user").clear()
@@ -50,7 +50,7 @@ class CreateNewContact(unittest.TestCase):
         driver.find_element_by_name("pass").send_keys("secret")
         driver.find_element_by_xpath("//input[@value='Login']").click()
 
-    def _open_homepage(self, driver):
+    def open_homepage(self, driver):
         """open homepage"""
         driver.get("http://localhost:444/addressbook/")
 
