@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import unittest
 from contact import Contact
-import time
 
 class CreateNewContact(unittest.TestCase):
     def setUp(self):
@@ -69,7 +68,6 @@ class CreateNewContact(unittest.TestCase):
         self.open_homepage(wd)
         self.login(wd, username="admin", password="secret")
         self.open_creating_contact_page(wd)
-        time.sleep(2)
         self.set_contact(Contact(firstname="asdfga", middlename="adsfasdf", lastname="adads", nickname="adfsasdf", title="sadfasdf", company="asdfaf", address="adsfadsf", home="adfasfd", mobile="asdfasdf", work="asdfaf", fax="adffda", email="asdf", homepage="asdf", address2="asd", phone2="asdf", note="asdf"))
         self.set_days(wd)
         self.submit_contact(wd)
