@@ -63,12 +63,12 @@ class CreateNewContact(unittest.TestCase):
             wd.find_element_by_name(form_name).send_keys(info)
 
         wd = self.wd
-        self._open_homepage(wd)
-        self._login(wd)
-        self._open_creating_contact_page(wd)
+        self.open_homepage(wd)
+        self.login(wd)
+        self.open_creating_contact_page(wd)
 
         """fill contact form"""
-        set_info("firstname", "First name")
+        set_info(group, "asfafagqre")
         set_info("middlename", "Middle name")
         set_info("lastname", "Last name")
         set_info("nickname", "nickname")
