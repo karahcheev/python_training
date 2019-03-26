@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 import unittest
-from group import  Group
+from group import Group
 
 class CreateGroup(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
         """open home page"""
+        wd = self.wd
         wd.get("http://localhost:444/addressbook/index.php")
 
-    def login(self, wd, username="admin", password="secret"):
+    def login(self, username="admin", password="secret"):
         """login"""
+        wd = self.wd
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -22,11 +24,13 @@ class CreateGroup(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//input[@value='Login']").click()
 
-    def open_group_page(self, wd):
+    def open_group_page(self):
+        wd = self.wd
         wd.find_element_by_link_text("groups").click()
 
-    def fill_group_form(self, wd, group):
+    def fill_group_form(self, group):
         """fill group form"""
+        wd = self.wd
         wd.find_element_by_name("new").click()
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
@@ -40,29 +44,29 @@ class CreateGroup(unittest.TestCase):
         """submit creation"""
         wd.find_element_by_name("submit").click()
 
-    def return_to_group_page(self, wd):
-                wd.find_element_by_link_text("group page").click()
+    def return_to_group_page(self):
+        wd = self.wd
+        wd.find_element_by_link_text("group page").click()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
     def test_add_group(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd)
-        self.open_group_page(wd)
-        self.fill_group_form(wd, Group(name="group name", header="group header", footer="group footer"))
-        self.return_to_group_page(wd)
-        self.logout(wd)
+        self.open_home_page()
+        self.login()
+        self.open_group_page()
+        self.fill_group_form(Group(name="group name", header="group header", footer="group footer"))
+        self.return_to_group_page()
+        self.logout()
 
     def test_add_epty_group(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd)
-        self.open_group_page(wd)
-        self.fill_group_form(wd, Group(name="", header="", footer=""))
-        self.return_to_group_page(wd)
-        self.logout(wd)
+        self.open_home_page()
+        self.login()
+        self.open_group_page()
+        self.fill_group_form(Group(name="", header="", footer=""))
+        self.return_to_group_page()
+        self.logout()
 
     def tearDown(self):
         self.wd.quit()
