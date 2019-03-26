@@ -29,8 +29,8 @@ class Application:
         wd.find_element_by_link_text("groups").click()
 
     def fill_group_form(self, group):
-        """fill group form"""
         wd = self.wd
+        """fill group form"""
         self.open_group_page()
         wd.find_element_by_name("new").click()
         wd.find_element_by_name("group_name").click()

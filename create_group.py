@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pytest
 from group import Group
 from application import Application
@@ -11,7 +12,7 @@ def app(request):
 
 
 def test_add_group(app):
-    app.login()
+    app.login(username="admin", password="secret")
     app.fill_group_form(Group(name="group name", header="group header", footer="group footer"))
     app.logout()
 
