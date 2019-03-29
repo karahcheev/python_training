@@ -1,6 +1,5 @@
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.support.ui import Select
-from contact import Contact
 
 
 class Application:
