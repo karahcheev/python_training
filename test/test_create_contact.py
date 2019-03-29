@@ -12,10 +12,10 @@ def app(request):
 
 
 def test_create_contact(app):
-    app.login(username="admin", password="secret")
+    app.session.login(username="admin", password="secret")
     app.set_contact(Contact(firstname="asdfga", middlename="adsfasdf", lastname="adads", nickname="adfsasdf",
                             title="sfasdf", company="asdfaf", address="adsfadsf", home="adfasfd", mobile="asdfasdf",
                             work="asdfaf", fax="adffda", email="asdf", homepage="asdf", address2="asd", phone2="asdf",
                             note="asdf")
                     )
-    app.logout()
+    app.session.logout()
