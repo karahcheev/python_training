@@ -6,30 +6,35 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-    def set_info(self, form_name, info):
-        self.app.wd.find_element_by_name(form_name).click()
-        self.app.wd.find_element_by_name(form_name).clear()
-        self.app.wd.find_element_by_name(form_name).send_keys(info)
+    def change_field_value(self, field_name, text):
+        if text is not None:
+            self.app.wd.find_element_by_name(field_name).click()
+            self.app.wd.find_element_by_name(field_name).clear()
+            self.app.wd.find_element_by_name(field_name).send_keys(text)
+
+    def fill_contact_form(self, contact):
+
+        self.change_field_value("firstname", contact.firstname)
+        self.change_field_value("middlename", contact.middlename)
+        self.change_field_value("lastname", contact.lastname)
+        self.change_field_value("nickname", contact.nickname)
+        self.change_field_value("title", contact.title)
+        self.change_field_value("company", contact.company)
+        self.change_field_value("address", contact.address)
+        self.change_field_value("home", contact.home)
+        self.change_field_value("mobile", contact.mobile)
+        self.change_field_value("work", contact.work)
+        self.change_field_value("fax", contact.fax)
+        self.change_field_value("email", contact.email)
+        self.change_field_value("homepage", contact.homepage)
+        self.change_field_value("address2", contact.address2)
+        self.change_field_value("phone2", contact.phone2)
+        self.change_field_value("notes", contact.note)
 
     def create(self, contact):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
-        self.set_info("firstname", contact.firstname)
-        self.set_info("middlename", contact.middlename)
-        self.set_info("lastname", contact.lastname)
-        self.set_info("nickname", contact.nickname)
-        self.set_info("title", contact.title)
-        self.set_info("company", contact.company)
-        self.set_info("address", contact.address)
-        self.set_info("home", contact.home)
-        self.set_info("mobile", contact.mobile)
-        self.set_info("work", contact.work)
-        self.set_info("fax", contact.fax)
-        self.set_info("email", contact.email)
-        self.set_info("homepage", contact.homepage)
-        self.set_info("address2", contact.address2)
-        self.set_info("phone2", contact.phone2)
-        self.set_info("notes", contact.note)
+        self.fill_contact_form(contact)
         self.set_days()
         self.submit_contact()
         self.app.return_home_page()
@@ -57,8 +62,19 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
+    def modify_first_contact(self, new_contact_data):
+        wd = self.app.wd
+        self.select_first_contact()
+        wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
+        self.fill_contact_form(new_contact_data)
+        wd.find_element_by_name("update").click()
+
     def delete_first_contact(self):
         wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_contact()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
+
+    def select_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
