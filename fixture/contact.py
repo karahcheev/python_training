@@ -6,6 +6,11 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
+    def open_contact_list(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith("/addressbook/")):
+            wd.find_element_by_link_text("home").click()
+
     def change_field_value(self, field_name, text):
         if text is not None:
             self.app.wd.find_element_by_name(field_name).click()
@@ -13,29 +18,29 @@ class ContactHelper:
             self.app.wd.find_element_by_name(field_name).send_keys(text)
 
     def fill_contact_form(self, contact):
-
         self.change_field_value("firstname", contact.firstname)
         self.change_field_value("middlename", contact.middlename)
         self.change_field_value("lastname", contact.lastname)
         self.change_field_value("nickname", contact.nickname)
-        self.change_field_value("title", contact.title)
-        self.change_field_value("company", contact.company)
-        self.change_field_value("address", contact.address)
-        self.change_field_value("home", contact.home)
-        self.change_field_value("mobile", contact.mobile)
-        self.change_field_value("work", contact.work)
-        self.change_field_value("fax", contact.fax)
-        self.change_field_value("email", contact.email)
-        self.change_field_value("homepage", contact.homepage)
-        self.change_field_value("address2", contact.address2)
-        self.change_field_value("phone2", contact.phone2)
-        self.change_field_value("notes", contact.note)
+        # self.change_field_value("title", contact.title)
+        # self.change_field_value("company", contact.company)
+        # self.change_field_value("address", contact.address)
+        # self.change_field_value("home", contact.home)
+        # self.change_field_value("mobile", contact.mobile)
+        # self.change_field_value("work", contact.work)
+        # self.change_field_value("fax", contact.fax)
+        # self.change_field_value("email", contact.email)
+        # self.change_field_value("homepage", contact.homepage)
+        # self.change_field_value("address2", contact.address2)
+        # self.change_field_value("phone2", contact.phone2)
+        # self.change_field_value("notes", contact.note)
 
     def create(self, contact):
         wd = self.app.wd
+        self.open_contact_list()
         wd.find_element_by_link_text("add new").click()
         self.fill_contact_form(contact)
-        self.set_days()
+        #self.set_days()
         self.submit_contact()
         self.app.return_home_page()
 
@@ -74,7 +79,7 @@ class ContactHelper:
         self.select_first_contact()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
-        wd.implicitly_wait(4)
+        self.open_contact_list()
 
     def select_first_contact(self):
         wd = self.app.wd
