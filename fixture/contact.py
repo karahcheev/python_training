@@ -23,18 +23,20 @@ class ContactHelper:
         self.change_field_value("middlename", contact.middlename)
         self.change_field_value("lastname", contact.lastname)
         self.change_field_value("nickname", contact.nickname)
-        # self.change_field_value("title", contact.title)
-        # self.change_field_value("company", contact.company)
-        # self.change_field_value("address", contact.address)
-        # self.change_field_value("home", contact.home)
-        # self.change_field_value("mobile", contact.mobile)
-        # self.change_field_value("work", contact.work)
-        # self.change_field_value("fax", contact.fax)
-        # self.change_field_value("email", contact.email)
-        # self.change_field_value("homepage", contact.homepage)
-        # self.change_field_value("address2", contact.address2)
-        # self.change_field_value("phone2", contact.phone2)
-        # self.change_field_value("notes", contact.note)
+        self.change_field_value("title", contact.title)
+        self.change_field_value("company", contact.company)
+        self.change_field_value("address", contact.address)
+        self.change_field_value("home", contact.homephone)
+        self.change_field_value("mobile", contact.mobilephone)
+        self.change_field_value("work", contact.workphone)
+        self.change_field_value("fax", contact.fax)
+        self.change_field_value("email", contact.email)
+        self.change_field_value("email2", contact.email2)
+        self.change_field_value("email3", contact.email3)
+        self.change_field_value("homepage", contact.homepage)
+        self.change_field_value("address2", contact.address2)
+        self.change_field_value("phone2", contact.secondaryphone)
+        self.change_field_value("notes", contact.note)
 
     def create(self, contact):
         wd = self.app.wd
@@ -78,7 +80,7 @@ class ContactHelper:
     def modify_contact_by_index(self,index, new_contact_data):
         wd = self.app.wd
         self.select_contact_by_index(index)
-        wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
+        wd.find_element_by_css_selector('img[alt="Edit"]').click()
         self.fill_contact_form(new_contact_data)
         wd.find_element_by_name("update").click()
         self.contact_cache = None
@@ -108,6 +110,8 @@ class ContactHelper:
             self.contact_cache = []
             for element in wd.find_elements_by_name("entry"):
                 cell = element.find_elements_by_tag_name("td")
+                firstname = cell[2].text
+                lastname = cell[1].text
                 id = element.find_element_by_name("selected[]").get_attribute("value")
-                self.contact_cache.append(Contact(firstname=cell[2].text, lastname=cell[1].text, id=id))
+                self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id))
             return list(self.contact_cache)
