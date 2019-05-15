@@ -21,7 +21,6 @@ testdata = [Contact(firstname="", lastname="", address="", homephone="")] + [
             email3=random_string("email3", 10),
             address2=random_string("adress2", 25),
             secondaryphone=random_string("444", 15)
-
     )
     for i in range(5)
 ]
