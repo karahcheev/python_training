@@ -22,7 +22,7 @@ testdata = [Contact(firstname="", lastname="", address="", homephone="")] + [
             address2=random_string("adress2", 25),
             secondaryphone=random_string("444", 15)
     )
-    for i in range(5)
+    for i in range(1)
 ]
 
 
