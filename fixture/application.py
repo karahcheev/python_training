@@ -13,7 +13,7 @@ class Application:
             self.wd = webdriver.Chrome()
         else:
             raise ValueError("Unrecognized browser %s" % browser)
-        # self.wd.implicitly_wait(2)
+        self.wd.implicitly_wait(1)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
@@ -31,7 +31,7 @@ class Application:
         wd.get(self.base_url)
 
     def return_to_group_page(self):
-        wd = self.wd
+        wd = self.wd`
         wd.find_element_by_link_text("group page").click()
 
     def destroy(self):
