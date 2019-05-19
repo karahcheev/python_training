@@ -31,7 +31,7 @@ class Application:
         wd.get(self.base_url)
 
     def return_to_group_page(self):
-        wd = self.wd`
+        wd = self.wd
         wd.find_element_by_link_text("group page").click()
 
     def destroy(self):
