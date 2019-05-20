@@ -1,6 +1,7 @@
 import pymysql
 from model.group import Group
 
+
 class DbFixture:
 
     def __init__(self, host, name, user, password):
@@ -9,7 +10,8 @@ class DbFixture:
         self.user = user
         self.password = password
         self.connection = pymysql.connect(host=host, database=name,
-                                          user=user, password=password)
+                                          user=user, password=password,
+                                          autocommit=True)
 
     def get_group_list(self):
         cursor = self.connection.cursor()
