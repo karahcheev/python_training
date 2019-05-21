@@ -3,7 +3,6 @@ from model.contact import Contact
 import pytest
 
 
-
 def test_create_contact(app, data_contact):
     contact = data_contact
     old_contacts = app.contact.get_contact_list()
