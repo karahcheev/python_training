@@ -21,5 +21,25 @@ testdata = [
             email="mail2",
             address2="adress2",
             secondaryphone="444"
+            ),
+    Contact(firstname="firstname3",
+            lastname="lastname3",
+            address="adress2",
+            homephone="111",
+            mobilephone="222",
+            workphone="333",
+            email="mail2",
+            address2="adress2",
+            secondaryphone="444"
+            ),
+    Contact(firstname="firstname4",
+            lastname="lastname4",
+            address="adress2",
+            homephone="111",
+            mobilephone="222",
+            workphone="333",
+            email="mail2",
+            address2="adress2",
+            secondaryphone="444"
             )
 ]

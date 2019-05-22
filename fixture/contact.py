@@ -188,3 +188,12 @@ class ContactHelper:
         secondaryphone = re.search("P: (.*)", text).group(1)
         return Contact(homephone=homephone, workphone=workphone,
                        mobilephone=mobilephone, secondaryphone=secondaryphone)
+
+    def add_contact_to_group_by_id(self, contact_id, group_name):
+        wd = self.app.wd
+        self.select_contact_by_id(contact_id)
+        Select(wd.find_element_by_css_selector("select[name='to_group']")).select_by_visible_text(group_name)
+        wd.find_element_by_name("add").click()
+
+
+
