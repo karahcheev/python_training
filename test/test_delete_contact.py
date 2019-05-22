@@ -7,7 +7,6 @@ def test_delete_by_index(app, db, check_ui):
         app.contact.create(Contact(firstname="before deleting"))
     old_contacts = db.get_contact_list()
     contact = random.choice(old_contacts)
-    # index = randrange(len(old_contacts))
     app.contact.delete_contact_by_id(contact.id)
     new_contacts = db.get_contact_list()
     old_contacts.remove(contact)
