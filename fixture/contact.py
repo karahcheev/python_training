@@ -94,7 +94,6 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
         self.contact_cache = None
 
-
     def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.select_contact_by_index(index)
@@ -195,12 +194,11 @@ class ContactHelper:
         Select(wd.find_element_by_css_selector("select[name='to_group']")).select_by_visible_text(group_name)
         wd.find_element_by_name("add").click()
 
-    def delete_contact_from_group_by_id(self, contact_id, group_name):
+    def delete_contact_from_group_by_name(self, contact_id, group_name):
         wd = self.app.wd
+        print("!! ", contact_id, "!! ", group_name)
         Select(wd.find_element_by_css_selector("select[name='group']")).select_by_visible_text(group_name)
         self.select_contact_by_id(contact_id)
         wd.find_element_by_css_selector('input[name="remove"]').click()
         self.open_contact_list()
-
-
 
